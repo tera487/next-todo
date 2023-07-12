@@ -3,23 +3,33 @@
 import * as React from "react";
 import Link from "next/link";
 import List from "@/app/components/elements/list";
-import TextField from "@/app/components/elements/text-field";
-import AddIcon from "@mui/icons-material/Add";
-import Button from "@mui/material/Button";
+import TodoForm from "@/app/components/elements/todoForm";
 import model from "@/app/features/todo";
 
 const initialTodoList: model[] = [{ id: 1, title: "test", status: "doing" }];
 
 export default function Home() {
   const [todoList, setTodoList] = React.useState(initialTodoList);
+
   const handleToggle = (value: number) => () => {
-    let newt: model[] = [...todoList];
-    if (newt[value].status == "doing") {
-      newt[value].status = "done";
+    let newTodoList: model[] = [...todoList];
+    if (newTodoList[value].status == "doing") {
+      newTodoList[value].status = "done";
     } else {
-      newt[value].status = "doing";
+      newTodoList[value].status = "doing";
     }
-    setTodoList(newt);
+    setTodoList(newTodoList);
+  };
+
+  const handleAddTodo = (value: string) => () => {
+    let newTodoList: model[] = [...todoList];
+    let newTodo: model = {
+      id: newTodoList.length + 1,
+      title: value,
+      status: "doing",
+    };
+    newTodoList.push(newTodo);
+    setTodoList(newTodoList);
   };
 
   return (
@@ -27,15 +37,7 @@ export default function Home() {
       <div>
         <h1>Hello World!</h1>
       </div>
-      <div className="flex">
-        <TextField></TextField>
-        <Button
-          variant="contained"
-          style={{ backgroundColor: "#1976d2", margin: "8px" }}
-        >
-          <AddIcon />
-        </Button>
-      </div>
+      <TodoForm handleAddTodo= {handleAddTodo}/>
       <List todoList={todoList} handleToggle={handleToggle} />
       <Link href="/hello">Log</Link>
     </main>
