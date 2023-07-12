@@ -6,20 +6,20 @@ import List from "@/app/components/elements/list";
 import TextField from "@/app/components/elements/text-field";
 import AddIcon from "@mui/icons-material/Add";
 import Button from "@mui/material/Button";
+import model from "@/app/features/todo";
+
+const initialTodoList: model[] = [{ id: 1, title: "test", status: "doing" }];
 
 export default function Home() {
-  const [checked, setChecked] = React.useState([0]);
+  const [todoList, setTodoList] = React.useState(initialTodoList);
   const handleToggle = (value: number) => () => {
-    const currentIndex = checked.indexOf(value);
-    const newChecked = [...checked];
-
-    if (currentIndex === -1) {
-      newChecked.push(value);
+    let newt: model[] = [...todoList];
+    if (newt[value].status == "doing") {
+      newt[value].status = "done";
     } else {
-      newChecked.splice(currentIndex, 1);
+      newt[value].status = "doing";
     }
-
-    setChecked(newChecked);
+    setTodoList(newt);
   };
 
   return (
@@ -36,7 +36,7 @@ export default function Home() {
           <AddIcon />
         </Button>
       </div>
-      <List checked={checked} handleToggle={handleToggle} />
+      <List todoList={todoList} handleToggle={handleToggle} />
       <Link href="/hello">Log</Link>
     </main>
   );

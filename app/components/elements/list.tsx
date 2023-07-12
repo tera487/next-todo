@@ -9,23 +9,24 @@ import {
   ListItemText,
   Checkbox,
   IconButton,
-} from "@/app/lib/material";
+} from "@mui/material";
 import { Delete } from "@mui/icons-material/";
+import model from "@/app/features/todo";
 
 type Props = {
-  checked: number[];
+  todoList: [...model[]];
   handleToggle: Function;
 };
 
 export default function CheckboxList(props: Props) {
   return (
     <List sx={{ width: "100%", maxWidth: 360, bgcolor: "background.paper" }}>
-      {[0, 1, 2, 3].map((value) => {
-        const labelId = `checkbox-list-label-${value}`;
+      {props.todoList.map((value, index) => {
+        const labelId = `checkbox-list-label-${value.id}`;
 
         return (
           <ListItem
-            key={value}
+            key={value.id}
             secondaryAction={
               <IconButton edge="end" aria-label="delete">
                 <Delete />
@@ -35,19 +36,19 @@ export default function CheckboxList(props: Props) {
           >
             <ListItemButton
               role={undefined}
-              onClick={props.handleToggle(value)}
+              onClick={props.handleToggle(index)}
               dense
             >
               <ListItemIcon>
                 <Checkbox
                   edge="start"
-                  checked={props.checked.indexOf(value) !== -1}
+                  checked={value.status === "done"}
                   tabIndex={-1}
                   disableRipple
                   inputProps={{ "aria-labelledby": labelId }}
                 />
               </ListItemIcon>
-              <ListItemText id={labelId} primary={`Line item ${value + 1}`} />
+              <ListItemText id={labelId} primary={value.title} />
             </ListItemButton>
           </ListItem>
         );
