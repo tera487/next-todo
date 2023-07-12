@@ -18,7 +18,7 @@ type Props = {
   handleToggle: Function;
 };
 
-export default function CheckboxList(props: Props) {
+export default function TodoList(props: Props) {
   return (
     <List sx={{ width: "100%", maxWidth: 360, bgcolor: "background.paper" }}>
       {props.todoList.map((value, index) => {

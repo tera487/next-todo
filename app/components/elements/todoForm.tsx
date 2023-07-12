@@ -10,7 +10,7 @@ type Props = {
   handleAddTodo: Function;
 };
 
-export default function BasicTextFields(props: Props) {
+export default function TodoForm(props: Props) {
   const [title, setTitle] = React.useState("");
 
   return (
