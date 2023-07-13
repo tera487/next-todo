@@ -16,6 +16,7 @@ import model from "@/app/features/todo";
 type Props = {
   todoList: [...model[]];
   handleToggle: Function;
+  handleDeleteTodo: Function;
 };
 
 export default function TodoList(props: Props) {
@@ -28,7 +29,11 @@ export default function TodoList(props: Props) {
           <ListItem
             key={value.id}
             secondaryAction={
-              <IconButton edge="end" aria-label="delete">
+              <IconButton
+                edge="end"
+                aria-label="delete"
+                onClick={props.handleDeleteTodo(index)}
+              >
                 <Delete />
               </IconButton>
             }
