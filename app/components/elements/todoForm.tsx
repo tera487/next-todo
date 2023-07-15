@@ -13,6 +13,12 @@ type Props = {
 export default function TodoForm(props: Props) {
   const [title, setTitle] = React.useState("");
 
+  function handleSubmit(e: any) {
+    e.preventDefault();
+    props.handleAddTodo(title);
+    setTitle("");
+  }
+
   return (
     <div className="flex">
       <Box
@@ -22,6 +28,7 @@ export default function TodoForm(props: Props) {
         }}
         noValidate
         autoComplete="off"
+        onSubmit={handleSubmit}
       >
         <TextField
           id="outlined-basic"
@@ -34,7 +41,8 @@ export default function TodoForm(props: Props) {
       <Button
         variant="contained"
         style={{ backgroundColor: "#1976d2", margin: "8px" }}
-        onClick={props.handleAddTodo(title)}
+        onClick={handleSubmit}
+        component="button"
       >
         <AddIcon />
       </Button>

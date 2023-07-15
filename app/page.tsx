@@ -13,7 +13,7 @@ export default function Home() {
   const [todoList, setTodoList] = React.useState(initialTodoList);
   const [todoId, setTodoId] = React.useState(initialTodoId);
 
-  const handleToggle = (value: number) => () => {
+  function handleToggle(value: number) {
     let newTodoList: model[] = [...todoList];
     if (newTodoList[value].status == "doing") {
       newTodoList[value].status = "done";
@@ -21,9 +21,9 @@ export default function Home() {
       newTodoList[value].status = "doing";
     }
     setTodoList(newTodoList);
-  };
+  }
 
-  const handleAddTodo = (value: string) => () => {
+  function handleAddTodo(value: string) {
     let newTodoList: model[] = [...todoList];
     let newTodoId = todoId;
     let newTodo: model = {
@@ -34,13 +34,13 @@ export default function Home() {
     newTodoList.push(newTodo);
     setTodoList(newTodoList);
     setTodoId(newTodoId + 1);
-  };
+  }
 
-  const handleDeleteTodo = (value: number) => () => {
+  function handleDeleteTodo(value: number) {
     let newTodoList: model[] = [...todoList];
     newTodoList.splice(value, 1);
     setTodoList(newTodoList);
-  };
+  }
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
