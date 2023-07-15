@@ -6,8 +6,13 @@ import List from "@/app/components/elements/list";
 import TodoForm from "@/app/components/elements/todoForm";
 import model from "@/app/features/todo";
 
-const initialTodoList: model[] = [{ id: 1, title: "test", status: "doing" }];
-const initialTodoId: number = 2;
+const initialTodoList: model[] = [
+  { id: 1, title: "test1", status: "done" },
+  { id: 2, title: "test2", status: "doing" },
+  { id: 3, title: "test3", status: "doing" },
+  { id: 4, title: "tes4", status: "doing" },
+];
+const initialTodoId: number = 5;
 
 export default function Home() {
   const [todoList, setTodoList] = React.useState(initialTodoList);
@@ -23,7 +28,7 @@ export default function Home() {
     setTodoList(newTodoList);
   };
 
-  const handleAddTodo = (value: string) => () => {
+  function handleAddTodo(value: string) {
     let newTodoList: model[] = [...todoList];
     let newTodoId = todoId;
     let newTodo: model = {
@@ -34,7 +39,7 @@ export default function Home() {
     newTodoList.push(newTodo);
     setTodoList(newTodoList);
     setTodoId(newTodoId + 1);
-  };
+  }
 
   const handleDeleteTodo = (value: number) => () => {
     let newTodoList: model[] = [...todoList];
@@ -53,7 +58,7 @@ export default function Home() {
         handleToggle={handleToggle}
         handleDeleteTodo={handleDeleteTodo}
       />
-      <Link href="/hello">Log</Link>
+      <Link href="/features/log">Log</Link>
     </main>
   );
 }
