@@ -32,8 +32,7 @@ export default function TodoForm(props: Props) {
       >
         <TextField
           id="outlined-basic"
-          label="Outlined"
-          variant="outlined"
+          label="title"
           value={title}
           onChange={(event) => setTitle(event.target.value)}
         />
